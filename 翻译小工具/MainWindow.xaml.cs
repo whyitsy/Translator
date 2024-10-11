@@ -12,7 +12,7 @@ namespace 翻译小工具
     {
         private string clipboardString = string.Empty;
         private readonly DispatcherTimer _timer;
-        private static TranslateText _translateText = new TranslateText();
+        private static readonly TranslateText TranslateText = new TranslateText();
 
         public MainWindow()
         {
@@ -39,7 +39,7 @@ namespace 翻译小工具
                     // 调用api进行翻译
                     Task.Run(async () =>
                     {
-                        var translatedText = await _translateText.CallTranslator(clipboardString);
+                        var translatedText = await TranslateText.CallTranslator(clipboardString);
                         Dispatcher.Invoke(() =>
                         {
                             TranslatedText.Text = translatedText;

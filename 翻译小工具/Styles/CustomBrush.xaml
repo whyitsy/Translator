@@ -1,0 +1,21 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <SolidColorBrush x:Key="BackgroundsColorLight" Color="#FAFDFF" Opacity="0.016"/>
+    <SolidColorBrush x:Key="BackgroundsColor" Color="#F1FBFF" Opacity="0.048"/>
+
+    <SolidColorBrush x:Key="InteractiveComponentsLight" Color="#DEF6FF" Opacity="0.11"/>
+    <SolidColorBrush x:Key="InteractiveComponents" Color="#C8F1FF" Opacity="0.185"/>
+    <SolidColorBrush x:Key="InteractiveComponentsDeep" Color="#B0E9FF" Opacity="0.263"/>
+
+    <SolidColorBrush x:Key="BordersSeparatorsLight" Color="#93DEFB" Opacity="0.357"/>
+    <SolidColorBrush x:Key="BordersSeparators" Color="#6BCFF3" Opacity="0.483"/>
+    <SolidColorBrush x:Key="BordersSeparatorsDeep" Color="#00BAEC" Opacity="0.675"/>
+
+    <SolidColorBrush x:Key="SolidColorsLight" Color="#00C8FA" Opacity="0.648"/>
+    <SolidColorBrush x:Key="SolidColors" Color="#00BDEE" Opacity="0.667"/>
+
+    <SolidColorBrush x:Key="AccessibleTextLight" Color="#007FA7" Opacity="0.785"/>
+    <SolidColorBrush x:Key="AccessibleText" Color="#003C54" Opacity="0.914"/>
+
+</ResourceDictionary>

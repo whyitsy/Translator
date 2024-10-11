@@ -9,20 +9,25 @@
         WindowStyle="None"
         Title="MainWindow" Height="450" Width="800"
         ResizeMode="CanResize"
-        MouseLeftButtonDown="MainWindow_OnMouseLeftButtonDown">
-
+        MouseLeftButtonDown="MainWindow_OnMouseLeftButtonDown"> 
     <Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0 0" EndPoint="1 1" >
+                <GradientStop Color="#06beb6" Offset="0"/>
+                <GradientStop Color="#f1c5fd" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="9*"/>
         </Grid.RowDefinitions>
-        <ToggleButton BorderThickness="0" IsChecked="True" Margin="5" HorizontalAlignment="Center" Click="SwitchIsTopWindow" Style="{StaticResource ToggleButtonFlip.Small}">
+        <ToggleButton BorderThickness="0" IsChecked="False" Margin="5" HorizontalAlignment="Center" Click="SwitchIsTopWindow"  Style="{StaticResource ToggleButtonFlip.Small}">
             <hc:StatusSwitchElement.CheckedElement>
-                <Border Background="{DynamicResource PrimaryBrush}">
+                <Border Background="{DynamicResource SuccessBrush}">
                     <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="钉" FontSize="20" Foreground="{DynamicResource TextIconBrush}"/>
                 </Border>
             </hc:StatusSwitchElement.CheckedElement>
-            <Border Background="{DynamicResource DangerBrush}">
+            <Border Background="{DynamicResource PrimaryBrush}">
                 <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="关" FontSize="20" Foreground="{DynamicResource TextIconBrush}"/>
             </Border>
         </ToggleButton>
@@ -36,7 +41,7 @@
             <StackPanel  Orientation="Vertical">
                 <hc:TextBox TextWrapping="Wrap" VerticalScrollBarVisibility="Hidden" MaxHeight="100"  Margin="10 10 10 25" x:Name="OriginText"  FontSize="20" VerticalContentAlignment="Top" HorizontalContentAlignment="Left" Padding="10"/>
                 <hc:TextBox TextWrapping="Wrap" VerticalScrollBarVisibility="Hidden" Margin="10 0" x:Name="TranslatedText" MaxHeight="200" FontSize="20" VerticalContentAlignment="Top" HorizontalContentAlignment="Left" Padding="10"/>
-                <Button Content="复制内容" Margin="0 30" Height="50" Width="100" Style="{StaticResource ButtonSuccess}"/>
+                <Button Content="复制内容"  Margin="0 30" Height="50" Width="100" Style="{StaticResource ButtonSuccess}"/>
             </StackPanel>
 
             <Viewbox MaxWidth="520" Grid.Column="1" VerticalAlignment="Top">
