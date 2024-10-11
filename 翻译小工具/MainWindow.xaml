@@ -8,7 +8,8 @@
         mc:Ignorable="d"
         WindowStyle="None"
         Title="MainWindow" Height="450" Width="800"
-        ResizeMode="CanResize"
+        ResizeMode="CanResizeWithGrip"
+        AllowsTransparency="True"
         MouseLeftButtonDown="MainWindow_OnMouseLeftButtonDown"> 
     <Grid>
         <Grid.Background>
