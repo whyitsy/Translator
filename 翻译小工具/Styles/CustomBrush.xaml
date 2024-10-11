@@ -18,4 +18,5 @@
     <SolidColorBrush x:Key="AccessibleTextLight" Color="#007FA7" Opacity="0.785"/>
     <SolidColorBrush x:Key="AccessibleText" Color="#003C54" Opacity="0.914"/>
 
+
 </ResourceDictionary>

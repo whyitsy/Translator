@@ -1,5 +1,9 @@
-﻿using System.Windows;
+﻿using System.IO;
+using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
+using System.Windows.Shapes;
 using System.Windows.Threading;
 using 翻译小工具.Utils;
 
@@ -11,44 +15,45 @@ namespace 翻译小工具
     public partial class MainWindow : Window
     {
         private string clipboardString = string.Empty;
+        private string lastTranslatedText = string.Empty;
         private readonly DispatcherTimer _timer;
-        private static readonly TranslateText TranslateText = new TranslateText();
 
         public MainWindow()
         {
             InitializeComponent();
 
+            Loaded += RotateImageAnimation;
             _timer = new DispatcherTimer
             {
                 Interval = TimeSpan.FromSeconds(1) // 设置定时器间隔为 1 秒
             };
-            _timer.Tick += Timer_Tick; // 订阅定时器事件
+            _timer.Tick += PoolingClipboard; // 订阅轮询剪切板定时器事件
             _timer.Start(); // 启动定时器
+
+
         }
 
-        private void Timer_Tick(object? sender, EventArgs e)
+        private void PoolingClipboard(object? sender, EventArgs e)
         {
             if (Clipboard.ContainsText())
             {
-                if (clipboardString != Clipboard.GetText())
+                if (clipboardString != Clipboard.GetText() && lastTranslatedText != Clipboard.GetText())
                 {
                     clipboardString = Clipboard.GetText();
-
 
                     OriginText.Text = clipboardString.Replace(Environment.NewLine, "");
                     // 调用api进行翻译
                     Task.Run(async () =>
                     {
-                        var translatedText = await TranslateText.CallTranslator(clipboardString);
+                        lastTranslatedText = await TranslateApi.TranslateApiSingleton.CallTranslator(clipboardString);
                         Dispatcher.Invoke(() =>
                         {
-                            TranslatedText.Text = translatedText;
+                            TranslatedText.Text = lastTranslatedText;
                         });
                     });
                 }
             }
         }
-
 
         private void ShutDownButtonClicked(object sender, RoutedEventArgs e)
         {
@@ -63,6 +68,39 @@ namespace 翻译小工具
         private void SwitchIsTopWindow(object sender, RoutedEventArgs e)
         {
             this.Topmost = !this.Topmost;
+        }
+
+        private void CopyTranslatedTextButtonClicked(object sender, RoutedEventArgs e)
+        {
+            Clipboard.SetText(TranslatedText.Text);
+        }
+
+        private void RotateImageAnimation(object sender, RoutedEventArgs e)
+        {
+            Storyboard rotationStoryboard = new Storyboard();
+            DoubleAnimation doubleAnimation = new DoubleAnimation
+            {
+                From = 0,
+                To = 360,
+                Duration = new Duration(TimeSpan.FromSeconds(10)),
+                RepeatBehavior = RepeatBehavior.Forever
+            };
+
+            Storyboard.SetTargetName(doubleAnimation, "RotateTransform");
+            Storyboard.SetTargetProperty(doubleAnimation, new PropertyPath(RotateTransform.AngleProperty));
+            rotationStoryboard.Children.Add(doubleAnimation);
+
+            rotationStoryboard.Begin(this);
+        }
+
+        private void SaveMemoClick(object sender, RoutedEventArgs e)
+        {
+            string filePath = "记录.txt";
+            using (StreamWriter writer = new StreamWriter(filePath))
+            {
+                writer.WriteLine(MemoText.Text);
+            }
+            MemoText.Text = "";
         }
     }
 }

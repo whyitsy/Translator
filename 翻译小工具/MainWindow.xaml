@@ -10,12 +10,18 @@
         Title="MainWindow" Height="450" Width="800"
         ResizeMode="CanResizeWithGrip"
         AllowsTransparency="True"
-        MouseLeftButtonDown="MainWindow_OnMouseLeftButtonDown"> 
+        MouseLeftButtonDown="MainWindow_OnMouseLeftButtonDown">
+    <Window.Resources>
+        <Style TargetType="TabItem">
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+    </Window.Resources>
+
     <Grid>
         <Grid.Background>
             <LinearGradientBrush StartPoint="0 0" EndPoint="1 1" >
-                <GradientStop Color="#06beb6" Offset="0"/>
-                <GradientStop Color="#f1c5fd" Offset="1"/>
+                <GradientStop Color="#f1c5fd" Offset="0"/>
+                <GradientStop Color="#06beb6" Offset="1"/>
             </LinearGradientBrush>
         </Grid.Background>
         <Grid.RowDefinitions>
@@ -32,22 +38,45 @@
                 <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="关" FontSize="20" Foreground="{DynamicResource TextIconBrush}"/>
             </Border>
         </ToggleButton>
-        <Button Style="{StaticResource ButtonPrimary}" Click="ShutDownButtonClicked" Content="关闭" HorizontalAlignment="Right" Margin="10 0"/>
+        <Button Grid.Row="0" IsCancel="True" Style="{StaticResource ButtonPrimary}" Click="ShutDownButtonClicked" Content="关闭" HorizontalAlignment="Right" Margin="10 0"/>
 
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="7*"/>
+                <ColumnDefinition Width="6*"/>
                 <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
-            <StackPanel  Orientation="Vertical">
-                <hc:TextBox TextWrapping="Wrap" VerticalScrollBarVisibility="Hidden" MaxHeight="100"  Margin="10 10 10 25" x:Name="OriginText"  FontSize="20" VerticalContentAlignment="Top" HorizontalContentAlignment="Left" Padding="10"/>
-                <hc:TextBox TextWrapping="Wrap" VerticalScrollBarVisibility="Hidden" Margin="10 0" x:Name="TranslatedText" MaxHeight="200" FontSize="20" VerticalContentAlignment="Top" HorizontalContentAlignment="Left" Padding="10"/>
-                <Button Content="复制内容"  Margin="0 30" Height="50" Width="100" Style="{StaticResource ButtonSuccess}"/>
-            </StackPanel>
+            <TabControl BorderThickness="0" Background="Transparent" Margin="10" MaxWidth="800">
+                <TabItem Header="百度通用翻译" IsSelected="True">
+                    <StackPanel Orientation="Vertical">
+                        <hc:TextBox TextWrapping="Wrap" VerticalScrollBarVisibility="Hidden" MaxHeight="100"  Margin="10" x:Name="OriginText"  FontSize="15" VerticalContentAlignment="Top" HorizontalContentAlignment="Left" Padding="10"/>
+                        <Button Margin="0 0 0 10" Style="{StaticResource ButtonDashedInfo}" hc:IconElement.Geometry="{StaticResource DownGeometry}"/>
+                        <hc:TextBox TextWrapping="Wrap" VerticalScrollBarVisibility="Hidden" Margin="10 0" x:Name="TranslatedText" MaxHeight="150" FontSize="15" VerticalContentAlignment="Top" HorizontalContentAlignment="Left" Padding="10"/>
+                        <Button Content="复制内容" Click="CopyTranslatedTextButtonClicked"  Margin="0 30" Height="50" Width="100" FontSize="15" Style="{StaticResource ButtonPrimary}"/>
+                    </StackPanel>
+                </TabItem>
+                <TabItem Header="Kimi">
+                    <TextBlock>KIMI</TextBlock>
+                </TabItem>
+                <TabItem Header="DeepSeek">
+                </TabItem>
+            </TabControl>
+            <StackPanel Grid.Column="1">
+                <Viewbox MaxWidth="520" VerticalAlignment="Top">
+                    <hc:FlipClock Margin="32"/>
+                </Viewbox>
+                <StackPanel Orientation="Horizontal">
+                    <TextBox Margin="20 0 0 0" x:Name="MemoText" Height="50" Width="180" VerticalContentAlignment="Top" HorizontalContentAlignment="Left" Padding="10"/>
+                    <Button Content="提交" Margin="10 10" Height="50" Click="SaveMemoClick" Style="{StaticResource ButtonInfo}"/>
+                </StackPanel>
 
-            <Viewbox MaxWidth="520" Grid.Column="1" VerticalAlignment="Top">
-                <hc:FlipClock Margin="32"/>
-            </Viewbox>
+                <hc:Gravatar  Margin="0 50 0 0" Height="100" Width="100" Style="{StaticResource GravatarCircleImg}">
+                    <Image Source="Avatars/Elysia-illustration.png" x:Name="RotateImage" RenderTransformOrigin="0.5,0.5">
+                        <Image.RenderTransform>
+                            <RotateTransform  x:Name="RotateTransform" Angle="0" />
+                        </Image.RenderTransform>
+                    </Image>
+                </hc:Gravatar>
+            </StackPanel>
         </Grid>
     </Grid>
 

@@ -8,7 +8,7 @@ using HandyControl.Controls;
 
 namespace 翻译小工具.Utils;
 
-public class TranslateText
+public class TranslateApi
 {
     private readonly string appid = "20210731000902409";
     private readonly string salt = "1337128331";
@@ -20,10 +20,10 @@ public class TranslateText
 
     public string From { get; set; } = "en";
     public string To { get; set; } = "zh";
-    public string Domain { get; set; } = "it";
 
     private static readonly HttpClient _httpClient = new HttpClient();
 
+    public static TranslateApi TranslateApiSingleton { get; } = new TranslateApi();
 
 
     public async Task<string> CallTranslator(string q)

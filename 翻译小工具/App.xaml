@@ -11,5 +11,6 @@
                 <ResourceDictionary Source="Styles/CustomBrush.xaml"></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
+       
     </Application.Resources>
 </Application>
