@@ -5,6 +5,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using 翻译小工具.Models;
 using 翻译小工具.Utils;
 
 namespace 翻译小工具
@@ -17,6 +18,7 @@ namespace 翻译小工具
         private string clipboardString = string.Empty;
         private string lastTranslatedText = string.Empty;
         private readonly DispatcherTimer _timer;
+        private TranslateEngine transEngine = TranslateEngine.百度通用翻译;
 
         public MainWindow()
         {
@@ -45,7 +47,7 @@ namespace 翻译小工具
                     // 调用api进行翻译
                     Task.Run(async () =>
                     {
-                        lastTranslatedText = await TranslateApi.TranslateApiSingleton.CallTranslator(clipboardString);
+                        lastTranslatedText = await TranslateApi.TranslateApiSingleton.CallTranslator(clipboardString, transEngine);
                         Dispatcher.Invoke(() =>
                         {
                             TranslatedText.Text = lastTranslatedText;
@@ -101,6 +103,21 @@ namespace 翻译小工具
                 writer.WriteLine(MemoText.Text);
             }
             MemoText.Text = "";
+        }
+
+        private void OnBaiduEngineSelected(object sender, RoutedEventArgs e)
+        {
+            transEngine = TranslateEngine.百度通用翻译;
+        }
+
+        private void OnKimiEngineSelected(object sender, RoutedEventArgs e)
+        {
+            transEngine = TranslateEngine.百度通用翻译;
+        }
+
+        private void OnDeepSeekEngineSelected(object sender, RoutedEventArgs e)
+        {
+            transEngine = TranslateEngine.百度通用翻译;
         }
     }
 }

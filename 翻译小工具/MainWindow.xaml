@@ -11,12 +11,6 @@
         ResizeMode="CanResizeWithGrip"
         AllowsTransparency="True"
         MouseLeftButtonDown="MainWindow_OnMouseLeftButtonDown">
-    <Window.Resources>
-        <Style TargetType="TabItem">
-            <Setter Property="Background" Value="Transparent"/>
-        </Style>
-    </Window.Resources>
-
     <Grid>
         <Grid.Background>
             <LinearGradientBrush StartPoint="0 0" EndPoint="1 1" >
@@ -45,28 +39,30 @@
                 <ColumnDefinition Width="6*"/>
                 <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
-            <TabControl BorderThickness="0" Background="Transparent" Margin="10" MaxWidth="800">
-                <TabItem Header="百度通用翻译" IsSelected="True">
-                    <StackPanel Orientation="Vertical">
-                        <hc:TextBox TextWrapping="Wrap" VerticalScrollBarVisibility="Hidden" MaxHeight="100"  Margin="10" x:Name="OriginText"  FontSize="15" VerticalContentAlignment="Top" HorizontalContentAlignment="Left" Padding="10"/>
-                        <Button Margin="0 0 0 10" Style="{StaticResource ButtonDashedInfo}" hc:IconElement.Geometry="{StaticResource DownGeometry}"/>
-                        <hc:TextBox TextWrapping="Wrap" VerticalScrollBarVisibility="Hidden" Margin="10 0" x:Name="TranslatedText" MaxHeight="150" FontSize="15" VerticalContentAlignment="Top" HorizontalContentAlignment="Left" Padding="10"/>
-                        <Button Content="复制内容" Click="CopyTranslatedTextButtonClicked"  Margin="0 30" Height="50" Width="100" FontSize="15" Style="{StaticResource ButtonPrimary}"/>
+
+            <HeaderedContentControl>
+                <HeaderedContentControl.Header>
+                    <StackPanel Orientation="Horizontal" Margin="0 0 0 5">
+                        <RadioButton GroupName="TransEngine" Click="OnBaiduEngineSelected" Content="百度翻译" Width="100" Margin="10 0 10 0" Style="{StaticResource RadioButtonSameAsButtonSuccess}"/>
+                        <RadioButton GroupName="TransEngine" Click="OnKimiEngineSelected" Content="Kimi" Width="100" Margin="0 0 10 0" Style="{StaticResource RadioButtonSameAsButtonInfo}"/>
+                        <RadioButton GroupName="TransEngine" Click="OnDeepSeekEngineSelected" Content="DeepSeek" Width="100" Style="{StaticResource RadioButtonSameAsButtonInfo}"/>
                     </StackPanel>
-                </TabItem>
-                <TabItem Header="Kimi">
-                    <TextBlock>KIMI</TextBlock>
-                </TabItem>
-                <TabItem Header="DeepSeek">
-                </TabItem>
-            </TabControl>
+                </HeaderedContentControl.Header>
+                <StackPanel Orientation="Vertical">
+                    <TextBox TextWrapping="Wrap" VerticalScrollBarVisibility="Hidden" MaxHeight="100"  Margin="10 0 10 10" x:Name="OriginText"  FontSize="15" VerticalContentAlignment="Top" HorizontalContentAlignment="Left" Padding="10"/>
+                    <Button Margin="0 0 0 10" Style="{StaticResource ButtonDashedInfo}" hc:IconElement.Geometry="{StaticResource DownGeometry}"/>
+                    <TextBox TextWrapping="Wrap" VerticalScrollBarVisibility="Hidden" Margin="10 0" x:Name="TranslatedText" MaxHeight="150" FontSize="15" VerticalContentAlignment="Top" HorizontalContentAlignment="Left" Padding="10"/>
+                    <Button Content="复制内容" Click="CopyTranslatedTextButtonClicked"  Margin="0 30" Height="50" Width="100" FontSize="15" Style="{StaticResource ButtonPrimary}"/>
+                </StackPanel>
+            </HeaderedContentControl>
+            
             <StackPanel Grid.Column="1">
                 <Viewbox MaxWidth="520" VerticalAlignment="Top">
                     <hc:FlipClock Margin="32"/>
                 </Viewbox>
                 <StackPanel Orientation="Horizontal">
                     <TextBox Margin="20 0 0 0" x:Name="MemoText" Height="50" Width="180" VerticalContentAlignment="Top" HorizontalContentAlignment="Left" Padding="10"/>
-                    <Button Content="提交" Margin="10 10" Height="50" Click="SaveMemoClick" Style="{StaticResource ButtonInfo}"/>
+                    <Button Content="提交" Margin="10 10" Height="50" Click="SaveMemoClick" Style="{StaticResource ButtonSuccess}"/>
                 </StackPanel>
 
                 <hc:Gravatar  Margin="0 50 0 0" Height="100" Width="100" Style="{StaticResource GravatarCircleImg}">

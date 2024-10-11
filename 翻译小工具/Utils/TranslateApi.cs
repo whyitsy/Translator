@@ -4,34 +4,52 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 using HandyControl.Controls;
+using 翻译小工具.Models;
 
 
 namespace 翻译小工具.Utils;
 
 public class TranslateApi
 {
-    private readonly string appid = "20210731000902409";
-    private readonly string salt = "1337128331";
-    private readonly string key = "l0eudFB8VrhghMP9Ts6K";
+    // 百度api使用
+    private readonly string bd_appid = "20210731000902409";
+    private readonly string bd_salt = "1337128331";
+    private readonly string bd_key = "l0eudFB8VrhghMP9Ts6K";
+    private readonly string bd_baseUrl = "http://api.fanyi.baidu.com/api/trans/vip/translate";
+    public string bd_From { get; set; } = "en";
+    public string bd_To { get; set; } = "zh";
 
-    private string query = string.Empty;
+    //  kimichat使用
+    private readonly string kimi_key = "sk-FWeFulC6S4MbaUgJx3SrAfs3gTBl1gy7wk5XAuHFyq1YxU2S";
 
-    private readonly string baseUrl = "http://api.fanyi.baidu.com/api/trans/vip/translate";
 
-    public string From { get; set; } = "en";
-    public string To { get; set; } = "zh";
+    // deepseek使用
+    private readonly string ds_key = "sk-372c540fc5e84d04b2ba1b8743b63e7c";
+
+
+
 
     private static readonly HttpClient _httpClient = new HttpClient();
 
     public static TranslateApi TranslateApiSingleton { get; } = new TranslateApi();
 
 
-    public async Task<string> CallTranslator(string q)
+    public async Task<string> CallTranslator(string q, TranslateEngine engine)
     {
-        
-        string md5Sign = Md5Helper.GetMd5Hash($"{appid}{q}{salt}{key}");
-        query = WebUtility.UrlEncode(q);
-        string url = $"{baseUrl}?q={query}&from={From}&to={To}&appid={appid}&salt={salt}&sign={md5Sign}";
+        return engine switch
+        {
+            TranslateEngine.百度通用翻译 => await BaiduEngine(q),
+            TranslateEngine.DeepSeek => await DeepSeekEngine(q),
+            TranslateEngine.KimiChat => await KimiChatEngine(q),
+            _ => ""
+        };
+    }
+
+    private async Task<string> BaiduEngine(string q)
+    {
+        string md5Sign = Md5Helper.GetMd5Hash($"{bd_appid}{q}{bd_salt}{bd_key}");
+        var query = WebUtility.UrlEncode(q);
+        string url = $"{bd_baseUrl}?q={query}&from={bd_From}&to={bd_To}&bd_appid={bd_appid}&bd_salt={bd_salt}&sign={md5Sign}";
 
         try
         {
@@ -52,6 +70,15 @@ public class TranslateApi
             MessageBox.Show(ex.Message);
             return string.Empty;
         }
+    }
+
+    private async Task<string> KimiChatEngine(string q)
+    {
+        return "";
+    }
+    private async Task<string> DeepSeekEngine(string q)
+    {
+        return "";
     }
 
 }

@@ -1,4 +1,4 @@
-﻿namespace 翻译小工具.Utils;
+﻿namespace 翻译小工具.Models;
 
 public class BaiduFanYiResponseModel
 {
