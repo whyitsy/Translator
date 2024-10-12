@@ -35,27 +35,10 @@
                 <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
 
-            <!--<HeaderedContentControl>
-                <HeaderedContentControl.Header>
-                    <StackPanel Orientation="Horizontal" Margin="0 0 0 5">
-                        <RadioButton GroupName="TransEngine" Click="OnBaiduEngineSelected" Content="百度通用翻译" Width="100" Margin="10 0 10 0" Style="{StaticResource RadioButtonSameAsButtonSuccess}"/>
-                        <RadioButton Visibility="Collapsed" GroupName="TransEngine" Click="OnKimiEngineSelected" Content="Kimi" Width="100" Margin="0 0 10 0" Style="{StaticResource RadioButtonSameAsButtonInfo}"/>
-                        <RadioButton Visibility="Collapsed" GroupName="TransEngine" Click="OnDeepSeekEngineSelected" Content="DeepSeek" Width="100" Style="{StaticResource RadioButtonSameAsButtonInfo}"/>
-                    </StackPanel>
-                </HeaderedContentControl.Header>
-                <StackPanel Orientation="Vertical">
-                    <TextBox TextWrapping="Wrap" VerticalScrollBarVisibility="Hidden" MaxHeight="100"  Margin="10 0 10 10" x:Name="OriginText"  FontSize="15" VerticalContentAlignment="Top" HorizontalContentAlignment="Left" Padding="10"/>
-                    <Button Margin="0 0 0 10" Click="DoTranslate" Style="{StaticResource ButtonDashedPrimary}" hc:IconElement.Geometry="{StaticResource DownGeometry}"/>
-                    <TextBox TextWrapping="Wrap" VerticalScrollBarVisibility="Hidden" Margin="10 0" x:Name="TranslatedText" MaxHeight="150" FontSize="15" VerticalContentAlignment="Top" HorizontalContentAlignment="Left" Padding="10"/>
-                    <Button  Content="复制内容" Click="CopyTranslatedTextButtonClicked"  Margin="0 10" Height="50" Width="100" FontSize="15" Style="{StaticResource ButtonPrimary}"/>
-                </StackPanel>
-            </HeaderedContentControl>-->
-            <views:TranslatorLayoutView></views:TranslatorLayoutView>
+            <views:TranslatorLayoutView/>
 
             <StackPanel Grid.Column="1">
-                <hc:Gravatar  Margin="0 10 0 10" Height="150" Width="150" Style="{StaticResource GravatarCircleImg}">
-                    <Image Source="Avatars/Elysia-illustration.png" />
-                </hc:Gravatar>
+                <views:AvatarView/>
                 <StackPanel Orientation="Horizontal" Margin="0 10">
                     <TextBox Margin="20 0 0 0" x:Name="MemoText" Height="50" Width="180" VerticalContentAlignment="Top" HorizontalContentAlignment="Left" Padding="10"/>
                     <Button Content="提交" Margin="10 10" Height="50" Click="SaveMemoClick" Style="{StaticResource ButtonSuccess}"/>

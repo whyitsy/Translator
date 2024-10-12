@@ -12,15 +12,11 @@ namespace 翻译小工具
     /// </summary>
     public partial class MainWindow
     {
-        private string clipboardString = string.Empty;
-        private string lastTranslatedText = string.Empty;
-        private TranslateEngine transEngine = TranslateEngine.百度通用翻译;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            Loaded += LoadMemoList;
             Loaded += LoadMemoList;
         }
 
@@ -61,21 +57,6 @@ namespace 翻译小工具
                 ListBoxInRB.Items.Add(MemoText.Text);
             }
             MemoText.Text = "";
-        }
-
-        private void OnBaiduEngineSelected(object sender, RoutedEventArgs e)
-        {
-            transEngine = TranslateEngine.百度通用翻译;
-        }
-
-        private void OnKimiEngineSelected(object sender, RoutedEventArgs e)
-        {
-            transEngine = TranslateEngine.百度通用翻译;
-        }
-
-        private void OnDeepSeekEngineSelected(object sender, RoutedEventArgs e)
-        {
-            transEngine = TranslateEngine.百度通用翻译;
         }
 
         private void ChangeMemoListVisibility(object sender, RoutedEventArgs e)

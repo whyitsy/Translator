@@ -17,16 +17,17 @@ public partial class TranslatorLayoutViewModel:ObservableObject
     private string _translatedText = string.Empty;
 
 
+    [RelayCommand]  
+    private void CopyOriginToClipBoard(string textToClipboard)
+    {
+        Clipboard.SetText(textToClipboard);
+    }
+
     [RelayCommand]
-    private void CopyToClipboard()
+    private void CopyResultToClipboard()
     {
         Clipboard.SetText(TranslatedText);
     }
 
-    [RelayCommand]
-    private async Task DoTranslateAsync()
-    {
-        TranslatedText = await TranslateApi.GetSingleton.CallTranslator(TextToTranslate, TranslateEngine);
-    }
 
 }

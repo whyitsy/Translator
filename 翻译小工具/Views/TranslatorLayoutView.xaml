@@ -19,10 +19,10 @@
             </StackPanel>
         </HeaderedContentControl.Header>
         <StackPanel Orientation="Vertical">
-            <TextBox TextWrapping="Wrap" Text="{Binding TextToTranslate}" VerticalScrollBarVisibility="Hidden" MaxHeight="100" Margin="10" FontSize="15" VerticalContentAlignment="Top" HorizontalContentAlignment="Left" Padding="10"/>
-            <Button Margin="0 0 0 10" Background="Transparent" BorderThickness="0"  hc:IconElement.Geometry="{StaticResource DownGeometry}"/>
+            <TextBox TextWrapping="Wrap" x:Name="OriginTb" Text="{Binding TextToTranslate, Mode=OneWay}"  VerticalScrollBarVisibility="Hidden" MaxHeight="100" Margin="10" FontSize="15" VerticalContentAlignment="Top" HorizontalContentAlignment="Left" Padding="10"/>
+            <Button Margin="0 0 0 10" Command="{Binding CopyOriginToClipBoardCommand}" CommandParameter="{Binding ElementName=OriginTb, Path=Text}" Background="Transparent" BorderThickness="0"  hc:IconElement.Geometry="{StaticResource DownGeometry}"/>
             <TextBox TextWrapping="Wrap" Text="{Binding TranslatedText}" VerticalScrollBarVisibility="Hidden" Margin="10 0" MaxHeight="150" FontSize="15" VerticalContentAlignment="Top" HorizontalContentAlignment="Left" Padding="10"/>
-            <Button Content="复制"  Command="{Binding CopyToClipboardCommand}" Margin="0 10" Height="50" Width="100" FontSize="15" Style="{StaticResource ButtonPrimary}"/>
+            <Button Content="复制"  Command="{Binding CopyResultToClipboardCommand}" Margin="0 10" Height="50" Width="100" FontSize="15" Style="{StaticResource ButtonPrimary}"/>
         </StackPanel>
     </HeaderedContentControl>
 
