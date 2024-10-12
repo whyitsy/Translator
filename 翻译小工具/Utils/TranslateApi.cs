@@ -49,7 +49,7 @@ public class TranslateApi
     {
         string md5Sign = Md5Helper.GetMd5Hash($"{bd_appid}{q}{bd_salt}{bd_key}");
         var query = WebUtility.UrlEncode(q);
-        string url = $"{bd_baseUrl}?q={query}&from={bd_From}&to={bd_To}&bd_appid={bd_appid}&bd_salt={bd_salt}&sign={md5Sign}";
+        string url = $"{bd_baseUrl}?q={query}&from={bd_From}&to={bd_To}&appid={bd_appid}&salt={bd_salt}&sign={md5Sign}";
 
         try
         {

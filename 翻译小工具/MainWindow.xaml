@@ -14,8 +14,9 @@
     <Grid>
         <Grid.Background>
             <LinearGradientBrush StartPoint="0 0" EndPoint="1 1" >
-                <GradientStop Color="#f1c5fd" Offset="0"/>
-                <GradientStop Color="#06beb6" Offset="1"/>
+                <GradientStop Color="#D16BA5" Offset="0"/>
+                <GradientStop Color="#86A8E7" Offset="0.7"/>
+                <GradientStop Color="#5FFBF1" Offset="1"/>
             </LinearGradientBrush>
         </Grid.Background>
         <Grid.RowDefinitions>
@@ -43,35 +44,42 @@
             <HeaderedContentControl>
                 <HeaderedContentControl.Header>
                     <StackPanel Orientation="Horizontal" Margin="0 0 0 5">
-                        <RadioButton GroupName="TransEngine" Click="OnBaiduEngineSelected" Content="百度翻译" Width="100" Margin="10 0 10 0" Style="{StaticResource RadioButtonSameAsButtonSuccess}"/>
-                        <RadioButton GroupName="TransEngine" Click="OnKimiEngineSelected" Content="Kimi" Width="100" Margin="0 0 10 0" Style="{StaticResource RadioButtonSameAsButtonInfo}"/>
-                        <RadioButton GroupName="TransEngine" Click="OnDeepSeekEngineSelected" Content="DeepSeek" Width="100" Style="{StaticResource RadioButtonSameAsButtonInfo}"/>
+                        <RadioButton GroupName="TransEngine" Click="OnBaiduEngineSelected" Content="百度通用翻译" Width="100" Margin="10 0 10 0" Style="{StaticResource RadioButtonSameAsButtonSuccess}"/>
+                        <RadioButton Visibility="Collapsed" GroupName="TransEngine" Click="OnKimiEngineSelected" Content="Kimi" Width="100" Margin="0 0 10 0" Style="{StaticResource RadioButtonSameAsButtonInfo}"/>
+                        <RadioButton Visibility="Collapsed" GroupName="TransEngine" Click="OnDeepSeekEngineSelected" Content="DeepSeek" Width="100" Style="{StaticResource RadioButtonSameAsButtonInfo}"/>
                     </StackPanel>
                 </HeaderedContentControl.Header>
                 <StackPanel Orientation="Vertical">
                     <TextBox TextWrapping="Wrap" VerticalScrollBarVisibility="Hidden" MaxHeight="100"  Margin="10 0 10 10" x:Name="OriginText"  FontSize="15" VerticalContentAlignment="Top" HorizontalContentAlignment="Left" Padding="10"/>
-                    <Button Margin="0 0 0 10" Style="{StaticResource ButtonDashedInfo}" hc:IconElement.Geometry="{StaticResource DownGeometry}"/>
+                    <Button Margin="0 0 0 10" Click="DoTranslate" Style="{StaticResource ButtonDashedPrimary}" hc:IconElement.Geometry="{StaticResource DownGeometry}"/>
                     <TextBox TextWrapping="Wrap" VerticalScrollBarVisibility="Hidden" Margin="10 0" x:Name="TranslatedText" MaxHeight="150" FontSize="15" VerticalContentAlignment="Top" HorizontalContentAlignment="Left" Padding="10"/>
-                    <Button Content="复制内容" Click="CopyTranslatedTextButtonClicked"  Margin="0 30" Height="50" Width="100" FontSize="15" Style="{StaticResource ButtonPrimary}"/>
+                    <Button  Content="复制内容" Click="CopyTranslatedTextButtonClicked"  Margin="0 10" Height="50" Width="100" FontSize="15" Style="{StaticResource ButtonPrimary}"/>
                 </StackPanel>
             </HeaderedContentControl>
-            
+
             <StackPanel Grid.Column="1">
-                <Viewbox MaxWidth="520" VerticalAlignment="Top">
-                    <hc:FlipClock Margin="32"/>
-                </Viewbox>
-                <StackPanel Orientation="Horizontal">
+                <hc:Gravatar  Margin="0 10 0 10" Height="150" Width="150" Style="{StaticResource GravatarCircleImg}">
+                    <Image Source="Avatars/Elysia-illustration.png" />
+                </hc:Gravatar>
+                <StackPanel Orientation="Horizontal" Margin="0 10">
                     <TextBox Margin="20 0 0 0" x:Name="MemoText" Height="50" Width="180" VerticalContentAlignment="Top" HorizontalContentAlignment="Left" Padding="10"/>
                     <Button Content="提交" Margin="10 10" Height="50" Click="SaveMemoClick" Style="{StaticResource ButtonSuccess}"/>
                 </StackPanel>
-
-                <hc:Gravatar  Margin="0 50 0 0" Height="100" Width="100" Style="{StaticResource GravatarCircleImg}">
-                    <Image Source="Avatars/Elysia-illustration.png" x:Name="RotateImage" RenderTransformOrigin="0.5,0.5">
-                        <Image.RenderTransform>
-                            <RotateTransform  x:Name="RotateTransform" Angle="0" />
-                        </Image.RenderTransform>
-                    </Image>
-                </hc:Gravatar>
+                <hc:RunningBlock x:Name="MemoList" Orientation="Vertical" Margin="20 0" Height="100" d:Content="笑死我吃哦dwdadawdwadawd" FontSize="15" FontWeight="Bold" Duration="0:0:10">
+                    <ListBox x:Name="ListBoxInRB" Background="Transparent" BorderThickness="0" IsEnabled="False">
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="ListBoxItem">
+                                <Setter Property="Background" Value="Transparent"/>
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding}" Foreground="Black"></TextBlock>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </hc:RunningBlock>
+                <Button Background="Transparent" Width="200" Click="ChangeMemoListVisibility" Margin="0 5 0 0" BorderThickness="0"></Button>
             </StackPanel>
         </Grid>
     </Grid>
