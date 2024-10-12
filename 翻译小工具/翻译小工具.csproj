@@ -6,10 +6,12 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>Resource\imgs\插画风-2.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Avatars\Elysia-illustration.png" />
+    <None Remove="Resource\Avatars\Elysia-illustration.png" />
+    <None Remove="Resource\imgs\插画风-2.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -18,7 +20,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Avatars\Elysia-illustration.png" />
+    <Resource Include="Resource\Avatars\Elysia-illustration.png" />
+    <Resource Include="Resource\imgs\插画风-2.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>

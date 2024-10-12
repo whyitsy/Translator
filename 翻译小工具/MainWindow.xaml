@@ -6,18 +6,20 @@
         xmlns:local="clr-namespace:翻译小工具"   
         xmlns:hc="https://handyorg.github.io/handycontrol"
         xmlns:views="clr-namespace:翻译小工具.Views"
+        xmlns:vm="clr-namespace:翻译小工具.ViewModels"
         mc:Ignorable="d"
         WindowStyle="None"
+        Icon="Resource/imgs/插画风-2.ico"
         Title="MainWindow" Height="450" Width="800"
         ResizeMode="CanResizeWithGrip"
         AllowsTransparency="True"
-        MouseLeftButtonDown="MainWindow_OnMouseLeftButtonDown">
+        MouseLeftButtonDown="WindowDragMove">
     <Grid Style="{DynamicResource BackgroundStyle}">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="9*"/>
         </Grid.RowDefinitions>
-        <ToggleButton BorderThickness="0" IsChecked="False" Margin="5" HorizontalAlignment="Center" Click="SwitchIsTopWindow"  Style="{StaticResource ToggleButtonFlip.Small}">
+        <ToggleButton BorderThickness="0" IsChecked="False" Margin="5" HorizontalAlignment="Center" Click="SwitchIsTop" CommandParameter="{}"  Style="{StaticResource ToggleButtonFlip.Small}">
             <hc:StatusSwitchElement.CheckedElement>
                 <Border Background="{DynamicResource SuccessBrush}">
                     <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="钉" FontSize="20" Foreground="{DynamicResource TextIconBrush}"/>
@@ -27,37 +29,16 @@
                 <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="关" FontSize="20" Foreground="{DynamicResource TextIconBrush}"/>
             </Border>
         </ToggleButton>
-        <Button Grid.Row="0" IsCancel="True" Style="{StaticResource ButtonPrimary}" Click="ShutDownButtonClicked" Content="关闭" HorizontalAlignment="Right" Margin="10 0"/>
-
+        <Button Grid.Row="0" IsCancel="True" Style="{StaticResource ButtonPrimary}" Click="ShutDownApp" Content="关闭" HorizontalAlignment="Right" Margin="10 0"/>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="6*"/>
                 <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
-
             <views:TranslatorLayoutView/>
-
             <StackPanel Grid.Column="1">
                 <views:AvatarView/>
-                <StackPanel Orientation="Horizontal" Margin="0 10">
-                    <TextBox Margin="20 0 0 0" x:Name="MemoText" Height="50" Width="180" VerticalContentAlignment="Top" HorizontalContentAlignment="Left" Padding="10"/>
-                    <Button Content="提交" Margin="10 10" Height="50" Click="SaveMemoClick" Style="{StaticResource ButtonSuccess}"/>
-                </StackPanel>
-                <hc:RunningBlock x:Name="MemoList" Orientation="Vertical" Margin="20 0" BorderThickness="0" Height="100" FontSize="15" FontWeight="Bold" Duration="0:0:10">
-                    <ListBox x:Name="ListBoxInRB" Background="Transparent" BorderThickness="0" IsEnabled="False">
-                        <ListBox.ItemContainerStyle>
-                            <Style TargetType="ListBoxItem">
-                                <Setter Property="Background" Value="Transparent"/>
-                            </Style>
-                        </ListBox.ItemContainerStyle>
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding}" Foreground="Black"></TextBlock>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-                </hc:RunningBlock>
-                <Button Background="Transparent" Width="200" Click="ChangeMemoListVisibility" Margin="0 5 0 0" BorderThickness="0"></Button>
+                <views:MemoView/>
             </StackPanel>
         </Grid>
     </Grid>
