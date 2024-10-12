@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:翻译小工具"
+        xmlns:local="clr-namespace:翻译小工具"   
         xmlns:hc="https://handyorg.github.io/handycontrol"
         mc:Ignorable="d"
         WindowStyle="None"
@@ -11,14 +11,7 @@
         ResizeMode="CanResizeWithGrip"
         AllowsTransparency="True"
         MouseLeftButtonDown="MainWindow_OnMouseLeftButtonDown">
-    <Grid>
-        <Grid.Background>
-            <LinearGradientBrush StartPoint="0 0" EndPoint="1 1" >
-                <GradientStop Color="#D16BA5" Offset="0"/>
-                <GradientStop Color="#86A8E7" Offset="0.7"/>
-                <GradientStop Color="#5FFBF1" Offset="1"/>
-            </LinearGradientBrush>
-        </Grid.Background>
+    <Grid Style="{DynamicResource BackgroundStyle}">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="9*"/>
@@ -65,7 +58,7 @@
                     <TextBox Margin="20 0 0 0" x:Name="MemoText" Height="50" Width="180" VerticalContentAlignment="Top" HorizontalContentAlignment="Left" Padding="10"/>
                     <Button Content="提交" Margin="10 10" Height="50" Click="SaveMemoClick" Style="{StaticResource ButtonSuccess}"/>
                 </StackPanel>
-                <hc:RunningBlock x:Name="MemoList" Orientation="Vertical" Margin="20 0" Height="100" d:Content="笑死我吃哦dwdadawdwadawd" FontSize="15" FontWeight="Bold" Duration="0:0:10">
+                <hc:RunningBlock x:Name="MemoList" Orientation="Vertical" Margin="20 0" Height="100" FontSize="15" FontWeight="Bold" Duration="0:0:10">
                     <ListBox x:Name="ListBoxInRB" Background="Transparent" BorderThickness="0" IsEnabled="False">
                         <ListBox.ItemContainerStyle>
                             <Style TargetType="ListBoxItem">
