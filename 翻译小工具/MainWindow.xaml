@@ -3,27 +3,23 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:翻译小工具"
+        xmlns:local="clr-namespace:翻译小工具"   
         xmlns:hc="https://handyorg.github.io/handycontrol"
+        xmlns:views="clr-namespace:翻译小工具.Views"
+        xmlns:vm="clr-namespace:翻译小工具.ViewModels"
         mc:Ignorable="d"
         WindowStyle="None"
+        Icon="Resource/imgs/插画风-2.ico"
         Title="MainWindow" Height="450" Width="800"
         ResizeMode="CanResizeWithGrip"
         AllowsTransparency="True"
-        MouseLeftButtonDown="MainWindow_OnMouseLeftButtonDown">
-    <Grid>
-        <Grid.Background>
-            <LinearGradientBrush StartPoint="0 0" EndPoint="1 1" >
-                <GradientStop Color="#D16BA5" Offset="0"/>
-                <GradientStop Color="#86A8E7" Offset="0.7"/>
-                <GradientStop Color="#5FFBF1" Offset="1"/>
-            </LinearGradientBrush>
-        </Grid.Background>
+        MouseLeftButtonDown="WindowDragMove">
+    <Grid Style="{DynamicResource BackgroundStyle}">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="9*"/>
         </Grid.RowDefinitions>
-        <ToggleButton BorderThickness="0" IsChecked="False" Margin="5" HorizontalAlignment="Center" Click="SwitchIsTopWindow"  Style="{StaticResource ToggleButtonFlip.Small}">
+        <ToggleButton BorderThickness="0" IsChecked="False" Margin="5" HorizontalAlignment="Center" Click="SwitchIsTop" CommandParameter="{}"  Style="{StaticResource ToggleButtonFlip.Small}">
             <hc:StatusSwitchElement.CheckedElement>
                 <Border Background="{DynamicResource SuccessBrush}">
                     <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="钉" FontSize="20" Foreground="{DynamicResource TextIconBrush}"/>
@@ -33,53 +29,16 @@
                 <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="关" FontSize="20" Foreground="{DynamicResource TextIconBrush}"/>
             </Border>
         </ToggleButton>
-        <Button Grid.Row="0" IsCancel="True" Style="{StaticResource ButtonPrimary}" Click="ShutDownButtonClicked" Content="关闭" HorizontalAlignment="Right" Margin="10 0"/>
-
+        <Button Grid.Row="0" IsCancel="True" Style="{StaticResource ButtonPrimary}" Click="ShutDownApp" Content="关闭" HorizontalAlignment="Right" Margin="10 0"/>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="6*"/>
                 <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
-
-            <HeaderedContentControl>
-                <HeaderedContentControl.Header>
-                    <StackPanel Orientation="Horizontal" Margin="0 0 0 5">
-                        <RadioButton GroupName="TransEngine" Click="OnBaiduEngineSelected" Content="百度通用翻译" Width="100" Margin="10 0 10 0" Style="{StaticResource RadioButtonSameAsButtonSuccess}"/>
-                        <RadioButton Visibility="Collapsed" GroupName="TransEngine" Click="OnKimiEngineSelected" Content="Kimi" Width="100" Margin="0 0 10 0" Style="{StaticResource RadioButtonSameAsButtonInfo}"/>
-                        <RadioButton Visibility="Collapsed" GroupName="TransEngine" Click="OnDeepSeekEngineSelected" Content="DeepSeek" Width="100" Style="{StaticResource RadioButtonSameAsButtonInfo}"/>
-                    </StackPanel>
-                </HeaderedContentControl.Header>
-                <StackPanel Orientation="Vertical">
-                    <TextBox TextWrapping="Wrap" VerticalScrollBarVisibility="Hidden" MaxHeight="100"  Margin="10 0 10 10" x:Name="OriginText"  FontSize="15" VerticalContentAlignment="Top" HorizontalContentAlignment="Left" Padding="10"/>
-                    <Button Margin="0 0 0 10" Click="DoTranslate" Style="{StaticResource ButtonDashedPrimary}" hc:IconElement.Geometry="{StaticResource DownGeometry}"/>
-                    <TextBox TextWrapping="Wrap" VerticalScrollBarVisibility="Hidden" Margin="10 0" x:Name="TranslatedText" MaxHeight="150" FontSize="15" VerticalContentAlignment="Top" HorizontalContentAlignment="Left" Padding="10"/>
-                    <Button  Content="复制内容" Click="CopyTranslatedTextButtonClicked"  Margin="0 10" Height="50" Width="100" FontSize="15" Style="{StaticResource ButtonPrimary}"/>
-                </StackPanel>
-            </HeaderedContentControl>
-
+            <views:TranslatorLayoutView/>
             <StackPanel Grid.Column="1">
-                <hc:Gravatar  Margin="0 10 0 10" Height="150" Width="150" Style="{StaticResource GravatarCircleImg}">
-                    <Image Source="Avatars/Elysia-illustration.png" />
-                </hc:Gravatar>
-                <StackPanel Orientation="Horizontal" Margin="0 10">
-                    <TextBox Margin="20 0 0 0" x:Name="MemoText" Height="50" Width="180" VerticalContentAlignment="Top" HorizontalContentAlignment="Left" Padding="10"/>
-                    <Button Content="提交" Margin="10 10" Height="50" Click="SaveMemoClick" Style="{StaticResource ButtonSuccess}"/>
-                </StackPanel>
-                <hc:RunningBlock x:Name="MemoList" Orientation="Vertical" Margin="20 0" Height="100" d:Content="笑死我吃哦dwdadawdwadawd" FontSize="15" FontWeight="Bold" Duration="0:0:10">
-                    <ListBox x:Name="ListBoxInRB" Background="Transparent" BorderThickness="0" IsEnabled="False">
-                        <ListBox.ItemContainerStyle>
-                            <Style TargetType="ListBoxItem">
-                                <Setter Property="Background" Value="Transparent"/>
-                            </Style>
-                        </ListBox.ItemContainerStyle>
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding}" Foreground="Black"></TextBlock>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-                </hc:RunningBlock>
-                <Button Background="Transparent" Width="200" Click="ChangeMemoListVisibility" Margin="0 5 0 0" BorderThickness="0"></Button>
+                <views:AvatarView/>
+                <views:MemoView/>
             </StackPanel>
         </Grid>
     </Grid>

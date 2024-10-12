@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="翻译小工具.Views.MemoView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:翻译小工具.Views"
+             xmlns:hc="https://handyorg.github.io/handycontrol"
+             xmlns:vm="clr-namespace:翻译小工具.ViewModels"
+             d:DataContext="{d:DesignInstance vm:MemoViewModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800" d:Background="Lavender">
+    <StackPanel Background="Transparent">
+        <StackPanel Orientation="Horizontal" Margin="0 10">
+            <TextBox Text="{Binding MemoText}" Margin="20 0 0 0" Height="50" Width="180" VerticalContentAlignment="Top" HorizontalContentAlignment="Left" Padding="10"/>
+            <Button Command="{Binding AddMemoItemCommand}" Content="提交" Margin="10 10" Height="50" Style="{StaticResource ButtonSuccess}"/>
+        </StackPanel>
+        <hc:RunningBlock Orientation="Vertical" Margin="20 0" BorderThickness="0" Height="100" FontSize="15" FontWeight="Bold" Duration="0:0:10">
+            <ListBox Visibility="{Binding MemoVisibility, Converter={StaticResource Boolean2VisibilityConverter}}" ItemsSource="{Binding MemoList}" d:ItemsSource="{d:SampleData ItemCount=6}" Background="Transparent" BorderThickness="0" IsEnabled="False">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Background" Value="Transparent"/>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}" Foreground="Black"></TextBlock>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </hc:RunningBlock>
+        <Button Background="Transparent" Command="{Binding ChangeMemoBoxVisibilityCommand}" Width="200" Margin="0 5 0 0" BorderThickness="0"></Button>
+    </StackPanel>
+
+</UserControl>
