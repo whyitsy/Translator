@@ -3,10 +3,10 @@
     <Style x:Key="BackgroundStyle" TargetType="Grid">
         <Setter Property="Background">
             <Setter.Value>
-                <LinearGradientBrush StartPoint="0 0" EndPoint="1 1" >
-                    <GradientStop Color="#D16BA5" Offset="0"/>
-                    <GradientStop Color="#86A8E7" Offset="0.7"/>
-                    <GradientStop Color="#5FFBF1" Offset="1"/>
+                <LinearGradientBrush StartPoint="0 1" EndPoint="1 0" >
+                    <GradientStop Color="#5FFBF1" Offset="0"/>
+                    <GradientStop Color="#86A8E7" Offset="0.5"/>
+                    <GradientStop Color="#D16BA5" Offset="1"/>
                 </LinearGradientBrush>
             </Setter.Value>
         </Setter>

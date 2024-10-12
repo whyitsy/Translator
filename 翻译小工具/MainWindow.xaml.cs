@@ -1,7 +1,5 @@
-﻿using System.IO;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
-using 翻译小工具.ViewModels;
 
 namespace 翻译小工具
 {

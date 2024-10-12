@@ -27,7 +27,7 @@ namespace 翻译小工具.Views
             InitializeComponent();
             _memoViewModel = new MemoViewModel();
             DataContext = _memoViewModel;
-
+            Loaded += _memoViewModel.LoadMemoData;
         }
     }
 }

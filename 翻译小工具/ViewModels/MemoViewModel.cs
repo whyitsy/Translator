@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.IO;
+using System.Windows;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
@@ -15,15 +16,16 @@ public partial class MemoViewModel : ObservableObject
 
     public ObservableCollection<string> MemoList { get; set; } = new ObservableCollection<string>();
 
-    public MemoViewModel()
-    {
-        LoadMemoData();
-    }
 
-    private void LoadMemoData()
+    public void LoadMemoData(object sender, RoutedEventArgs e)
     {
         MemoList.Clear();
-        using StreamReader reader = new StreamReader(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "记录.txt"));
+
+        string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "记录.txt");
+        if (!File.Exists(filePath))
+            File.Create(filePath).Dispose();
+
+        using StreamReader reader = new StreamReader(filePath);
         while (reader.ReadLine() is { } line)
         {
             MemoList.Add(line);
@@ -39,7 +41,8 @@ public partial class MemoViewModel : ObservableObject
     [RelayCommand]
     private void AddMemoItem()
     {
-        using (StreamWriter writer = new StreamWriter(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "记录.txt"), append: true))
+        string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "记录.txt");
+        using (StreamWriter writer = new StreamWriter(filePath, append: true))
         {
             writer.WriteLine(MemoText);
         }
