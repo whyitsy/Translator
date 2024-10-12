@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:翻译小工具"   
         xmlns:hc="https://handyorg.github.io/handycontrol"
+        xmlns:views="clr-namespace:翻译小工具.Views"
         mc:Ignorable="d"
         WindowStyle="None"
         Title="MainWindow" Height="450" Width="800"
@@ -34,7 +35,7 @@
                 <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
 
-            <HeaderedContentControl>
+            <!--<HeaderedContentControl>
                 <HeaderedContentControl.Header>
                     <StackPanel Orientation="Horizontal" Margin="0 0 0 5">
                         <RadioButton GroupName="TransEngine" Click="OnBaiduEngineSelected" Content="百度通用翻译" Width="100" Margin="10 0 10 0" Style="{StaticResource RadioButtonSameAsButtonSuccess}"/>
@@ -48,7 +49,8 @@
                     <TextBox TextWrapping="Wrap" VerticalScrollBarVisibility="Hidden" Margin="10 0" x:Name="TranslatedText" MaxHeight="150" FontSize="15" VerticalContentAlignment="Top" HorizontalContentAlignment="Left" Padding="10"/>
                     <Button  Content="复制内容" Click="CopyTranslatedTextButtonClicked"  Margin="0 10" Height="50" Width="100" FontSize="15" Style="{StaticResource ButtonPrimary}"/>
                 </StackPanel>
-            </HeaderedContentControl>
+            </HeaderedContentControl>-->
+            <views:TranslatorLayoutView></views:TranslatorLayoutView>
 
             <StackPanel Grid.Column="1">
                 <hc:Gravatar  Margin="0 10 0 10" Height="150" Width="150" Style="{StaticResource GravatarCircleImg}">
@@ -58,7 +60,7 @@
                     <TextBox Margin="20 0 0 0" x:Name="MemoText" Height="50" Width="180" VerticalContentAlignment="Top" HorizontalContentAlignment="Left" Padding="10"/>
                     <Button Content="提交" Margin="10 10" Height="50" Click="SaveMemoClick" Style="{StaticResource ButtonSuccess}"/>
                 </StackPanel>
-                <hc:RunningBlock x:Name="MemoList" Orientation="Vertical" Margin="20 0" Height="100" FontSize="15" FontWeight="Bold" Duration="0:0:10">
+                <hc:RunningBlock x:Name="MemoList" Orientation="Vertical" Margin="20 0" BorderThickness="0" Height="100" FontSize="15" FontWeight="Bold" Duration="0:0:10">
                     <ListBox x:Name="ListBoxInRB" Background="Transparent" BorderThickness="0" IsEnabled="False">
                         <ListBox.ItemContainerStyle>
                             <Style TargetType="ListBoxItem">

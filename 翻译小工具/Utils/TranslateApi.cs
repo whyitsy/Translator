@@ -31,7 +31,7 @@ public class TranslateApi
 
     private static readonly HttpClient _httpClient = new HttpClient();
 
-    public static TranslateApi TranslateApiSingleton { get; } = new TranslateApi();
+    public static TranslateApi GetSingleton { get; } = new TranslateApi();
 
 
     public async Task<string> CallTranslator(string q, TranslateEngine engine)
