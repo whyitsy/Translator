@@ -14,18 +14,18 @@
         ResizeMode="CanResizeWithGrip"
         AllowsTransparency="True"
         MouseLeftButtonDown="WindowDragMove">
-    <Grid Style="{DynamicResource BackgroundStyle}">
+    <Grid Style="{StaticResource BackgroundStyle}">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="9*"/>
         </Grid.RowDefinitions>
         <ToggleButton BorderThickness="0" IsChecked="False" Margin="5" HorizontalAlignment="Center" Click="SwitchIsTop" CommandParameter="{}"  Style="{StaticResource ToggleButtonFlip.Small}">
             <hc:StatusSwitchElement.CheckedElement>
-                <Border Background="{DynamicResource SuccessBrush}">
+                <Border Background="{StaticResource SuccessBrush}">
                     <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="钉" FontSize="20" Foreground="{DynamicResource TextIconBrush}"/>
                 </Border>
             </hc:StatusSwitchElement.CheckedElement>
-            <Border Background="{DynamicResource PrimaryBrush}">
+            <Border Background="{StaticResource PrimaryBrush}">
                 <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="关" FontSize="20" Foreground="{DynamicResource TextIconBrush}"/>
             </Border>
         </ToggleButton>

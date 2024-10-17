@@ -46,7 +46,6 @@ namespace 翻译小工具.Views
                     {
                         _translatorViewModel.TranslatedText = await TranslateApi.GetSingleton.CallTranslator(_translatorViewModel.TextToTranslate,
                          _translatorViewModel.TranslateEngine);
-
                     });
                 }
             }
